@@ -1,5 +1,5 @@
 import { useState } from "react"
-import "./list.css"
+import './list.css';
 
 function ToDoList() {
     const [tasks, setTasks] = useState(["walk","scat"]);
@@ -9,7 +9,15 @@ function ToDoList() {
         setNewTask(event.target.value);
     }
 
-    function addTask() {}
+    function addTask() {
+
+        if(newTask.trim()!= ""){
+        setTasks(t => [...t,newTask]);
+        setNewTask("");
+
+        }
+        
+    }
 
     function deleteTask(index) {}
 
@@ -23,10 +31,10 @@ function ToDoList() {
                 <h1>To do List</h1>
                 <input type="text" placeholder="blarg" value={newTask} onChange={handleInputChange} />
 
-                <button className="add-button" onClick={addTask}></button>
+                <button className="add-button" onClick={addTask}>add</button>
             </div>
 
-            <ol>
+            <ul>
                {tasks.map((task, index) => <li key={index}> <span>task: {task}
                <button className="delete-button" onClick={ () => deleteTask(index)}> del </button>
                <button className="moveTaskUp-button" onClick={() => moveTaskUp(index)}> up </button>
@@ -34,7 +42,7 @@ function ToDoList() {
                  </span> </li>)}
 
 
-            </ol>
+            </ul>
         </div>
     );
 }
