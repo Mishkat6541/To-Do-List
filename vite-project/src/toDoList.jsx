@@ -2,7 +2,7 @@ import { useState } from "react"
 import './list.css';
 
 function ToDoList() {
-    const [tasks, setTasks] = useState(["walk","scat"]);
+    const [tasks, setTasks] = useState(["walk 1000 miles" ,"kill the membrane"]);
     const [newTask, setNewTask] = useState("");
 
     function handleInputChange(event) {
@@ -24,15 +24,31 @@ function ToDoList() {
         setTasks(updatedTasks);
     }
 
-    function moveTaskUp(index) {}
+    function moveTaskUp(index) {
+        if(index>0){
 
-    function moveTaskDown(index) {}
+            const updatedTasks = [... tasks];
+            [updatedTasks[index], updatedTasks[index-1 ]] = [updatedTasks[index-1], updatedTasks[index]]
+            setTasks(updatedTasks);
+        }
+        
+    }
+
+    function moveTaskDown(index) {
+        if(index< tasks.length-1){
+
+            const updatedTasks = [... tasks];
+            [updatedTasks[index], updatedTasks[index+1 ]] = [updatedTasks[index+1], updatedTasks[index]]
+            setTasks(updatedTasks);
+        }
+
+    }
 
     return (
         <div className="To-Do-List">
             <div>
                 <h1>To do List</h1>
-                <input type="text" placeholder="blarg" value={newTask} onChange={handleInputChange} />
+                <input type="text" placeholder="task" value={newTask} onChange={handleInputChange} />
 
                 <button className="add-button" onClick={addTask}>add</button>
             </div>
